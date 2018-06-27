@@ -6,14 +6,6 @@
     background-repeat: no-repeat;
     background-image: url(./images/hero-1.jpg);
   }
-<<<<<<< HEAD
-  /* Optional: Makes the sample page fill the window. */
-  /* html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  } */
-=======
 
   .title {
     font-size: 3rem;  
@@ -43,4 +35,3 @@
     }
   }
 
->>>>>>> 827eece7c1608a2cec1c171e33bb5c74725fc274
