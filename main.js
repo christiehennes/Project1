@@ -1,9 +1,10 @@
 console.log('i am linked');
 
 //Variable Declarations
-let skResults = {
+let resultsOb = {
     //Object to hold the results of the songkick API response, including artist info, num of concerts, and the concerts object 
     artistName: '',
+    artistID: '',
     artistsConcerts: [],
     numConcerts: '',
     locationsArray:[] //holds all the location objects to be used for google maps 
@@ -18,6 +19,18 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
+
+    let queryUrl = ''; //Set the URL
+
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+    }).then(function(response){
+
+        let results = response.data;
+        
+        resultsOb.artistName = ''; 
+    });
 }
 
 
@@ -30,7 +43,7 @@ function createConcert(concert){
 
     let concert = {
         locationName: '',
-        venueAAddress: ''
+        venueAddress: ''
     }
 
 }
@@ -41,6 +54,7 @@ function displayConcerts(){
     //Alter html using jquery to clear out previous concert results and display new concert results 
     //This should display all the concerts in an accordian, the next function is for the individual concert display
     //Store the results in the locationArray for the skResults object 
+    //Need to create a data attribute to know which button you clicked (? unsure if this is ncessary)
 
 }
 
@@ -55,62 +69,72 @@ function displayConcertInfo(){
 }
 
 // Function: render map 
-function renderMap(){
-    //Call this function in the displayConcertInfo function
-    //This should use the google map api and load the different coord points on the map in clusters
-    //Use the locationsArray you saved to the skResults object and use this for the locations for clusters
+// function renderMap(){
+//     //Call this function in the displayConcertInfo function
+//     //This should use the google map api and load the different coord points on the map in clusters
+//     //Use the locationsArray you saved to the skResults object and use this for the locations for clusters
 
 
-    //Can delete these later 
-    let nyc = {lat: 40.7128, lng: -74.0060};
-    let museum = {lat: 40.7813, lng: -73.9740};
+//     // //Can delete these later 
+//     // let nyc = {lat: 40.7128, lng: -74.0060};
+//     // let museum = {lat: 40.7813, lng: -73.9740};
 
 
 
 
-    let map = new google.maps.Map(document.getElementById('map'), {
-        center: nyc,
-        zoom: 8
-    });
+//     let map = new google.maps.Map(document.getElementById('map'), {
+//         center: nyc,
+//         zoom: 8
+//     });
 
-    // var marker = new google.maps.Marker({position: nyc, map: map});
-    // let marker = new google.maps.Marker({position: museum, map:map});
+//     // var marker = new google.maps.Marker({position: nyc, map: map});
+//     // let marker = new google.maps.Marker({position: museum, map:map});
 
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+//     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        var markers = locations.map(function(location, i) {
-          return new google.maps.Marker({
-            position: location,
-            label: labels[i % labels.length]
-          });
-        });
+//         // Add some markers to the map.
+//         // Note: The code uses the JavaScript Array.prototype.map() method to
+//         // create an array of markers based on a given "locations" array.
+//         // The map() method here has nothing to do with the Google Maps API.
+//         var markers = locationsArray.map(function(location, i) {
+//           return new google.maps.Marker({
+//             position: location,
+//             label: labels[i % labels.length]
+//           });
+//         });
 
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+//         // Add a marker clusterer to manage the markers.
+//         var markerCluster = new MarkerClusterer(map, markers,
+//             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     
-            //UPDATE THESE TO BE THE LOCATION OF THE CONCERT AND USE IN var markers = []
-      var locations = [
-        nyc,
-        museum
-      ];
+//             //UPDATE THESE TO BE THE LOCATION OF THE CONCERT AND USE IN var markers = []
+//     //   var locations = [
+//     //     nyc,
+//     //     museum
+//     //   ];
 
-
-    
-    
-
-
-
-
-}
-
+// }
 
 
 //Click Handlers 
 
 // Click handler for the search artist button --> call the getArtistInfo function and pass in the text from input field 
+$(document).on('click', '.search', function(){
+
+    event.preventDefault(); //Prevent from submitting early 
+
+    let artist = $('#artist-search').val();  //Grab the value of the artist submit button //TODO change to match FE values
+
+    getArtistInfo(artist); //Call the function that calls the API     
+
+
+})
 // Click handler for clicking on a concert --> call the displayConcerts function and use the index from the concertObj array 
+$(document).on('click', '.display', function(){
+
+    event.preventDefault(); //Prevent from submitting early 
+
+   
+
+
+})
