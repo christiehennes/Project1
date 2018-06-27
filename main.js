@@ -16,7 +16,7 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
-  let artistID = `http://api.jambase.com/artists?name=${resultsOb.artistName}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`;
+  let artistID = `http://api.jambase.com/artists?name=${artist}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`;
 
     $.ajax({
         url: artistID,
@@ -48,15 +48,18 @@ function createConcert(concert){
     //Create a new concert object and add to artistsConcerts array 
     //Use a map to return coordinate info and save in locationsArray --> https://repl.it/repls/KosherOrneryDeeplearning
 
-    artistsConcerts.push(concert); //Add the concert to the concerts array. This adds the FULL unprocessed object 
+    resultsOb.artistsConcerts.push(concert); //Add the concert to the concerts array. This adds the FULL unprocessed object 
+    console.log("Concert obj:" + concert);
 
     //Create the location oject 
     let location = {
         lat: concert.Venue.Latitude,
         long: concert.Venue.Longitude,
     };
+    console.log(location.lat);
+    console.log(location.long);
 
-    locationsArray.push(loacation); //Add the location to the locations array 
+    resultsOb.locationsArray.push(location); //Add the location to the locations array 
 
 }
 
@@ -142,11 +145,12 @@ function initResultsOb(){
 //Click Handlers 
 
 // Click handler for the search artist button --> call the getArtistInfo function and pass in the text from input field 
-$(document).on('click', '.search', function(){
+$(document).on('click', '.find', function(){
 
     event.preventDefault(); //Prevent from submitting early 
 
-    let artist = $('#artist-search').val();  //Grab the value of the artist submit button //TODO change to match FE values
+    let artist = $('#find-artist').val();  //Grab the value of the artist submit button //TODO change to match FE values
+    console.log(artist);
 
     getArtistInfo(artist); //Call the function that calls the API     
 
