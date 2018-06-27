@@ -18,6 +18,7 @@
 
   .jumbotron {
       margin-top: -200px;
+      background: none !important;
   }
   
   .title.show {
