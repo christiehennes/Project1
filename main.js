@@ -29,16 +29,20 @@ function getArtistInfo(artist){
         $.ajax( {
             url: eventByArtistId,
             method: "GET"
-        }) .then(function(result) {
+        }).then(function(result) {
             console.log(result);
+
             resultsOb.numConcerts = result.Info.TotalResults;
             result.Events.forEach(event => {
                 createConcert(event);
             });
             
-            
+        }).then(function(){
+            displayConcertInfo();
         })
     });
+
+    
 }
 
 
@@ -49,7 +53,7 @@ function createConcert(concert){
     //Use a map to return coordinate info and save in locationsArray --> https://repl.it/repls/KosherOrneryDeeplearning
 
     resultsOb.artistsConcerts.push(concert); //Add the concert to the concerts array. This adds the FULL unprocessed object 
-    console.log("Concert obj:" + concert);
+    //console.log("Concert obj:" + concert);
 
     //Create the location oject 
     let location = {
@@ -65,21 +69,69 @@ function createConcert(concert){
 
 
 // Function: display concerts
-function displayConcerts(){
-    //Alter html using jquery to clear out previous concert results and display new concert results 
-    //This should display all the concerts in an accordian, the next function is for the individual concert display
-    //Store the results in the locationArray for the skResults object 
-    //Need to create a data attribute to know which button you clicked (? unsure if this is ncessary)
+// function displayAllConcerts(){
+//     //Alter html using jquery to clear out previous concert results and display new concert results 
+//     //This should display all the concerts in an accordian, the next function is for the individual concert display
+//     //Store the results in the locationArray for the skResults object 
+//     //Need to create a data attribute to know which button you clicked (? unsure if this is ncessary)
 
-}
+
+
+    
+
+// }
 
 
 // Function: display concert info 
 function displayConcertInfo(){
     //Display the concert information including the map 
-
+    console.log("inside display Concert Info");
+    console.log("Array:" + resultsOb.artistsConcerts);
+    let index=0;
 
     //Need to pass though the div ID or something to display the map in (maybe with a data attribute?)
+    resultsOb.artistsConcerts.forEach(function(concert){
+
+        let concertAccordian = `
+        <div class="card">
+            <div class="card-header" id="heading${index}">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="false"
+                        aria-controls="collapse${index}">
+                        ${concert.Venue.City} | ${concert.Date}
+                    </button>
+                </h5>
+            </div>
+            <div id="collapse${index}" class="collapse" aria-labelledby="heading${index}" data-parent="#accordionExample">
+                <div class="card-body d-flex justify-content-around">
+                    <div class="artist-data">
+                        <div class="venue-name">${concert.Venue.Name}</div>
+                        <div class="venue-address">${concert.Venue.Address} ${concert.Venue.City} ${concert.Venue.StateCode} ${concert.Venue.ZipCode}</div>
+                        <div class="venue-ticket-url">${concert.TicketUrl}</div>
+                        <div class="venue-date">${concert.Date}</div>
+                    </div>
+                    <div class="venue-map">
+                        <img src="./images/Google-Map-Placeholder.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+        $('#accordion').append(concertAccordian);
+
+        index++;
+
+
+
+
+        console.log("inside loop");
+        console.log("Venue Name:" + concert.Venue.Name );
+        console.log("Address:" + concert.Venue.Address + concert.Venue.City + concert.Venue.StateCode + concert.Venue.ZipCode);
+        console.log("Ticket URL:" +  concert.TicketUrl);
+
+
+    });
+
 
 }
 
