@@ -1,4 +1,7 @@
 
+body {
+  background-color: #343a40;
+}
 .hero {
     height: 450px;
     background-size: cover;
