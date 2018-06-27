@@ -1,9 +1,45 @@
-#map {
-    height: 100%;
+
+.hero {
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(./images/hero-1.jpg);
   }
+<<<<<<< HEAD
   /* Optional: Makes the sample page fill the window. */
   /* html, body {
     height: 100%;
     margin: 0;
     padding: 0;
   } */
+=======
+
+  .title {
+    font-size: 3rem;  
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 30%;
+    color: white;
+    animation: fadein 4s ease;
+  }
+
+  .jumbotron {
+      margin-top: -200px;
+  }
+  
+  .title.show {
+    opacity: 1;
+  }
+  
+  @keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+>>>>>>> 827eece7c1608a2cec1c171e33bb5c74725fc274
