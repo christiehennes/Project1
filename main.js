@@ -60,11 +60,16 @@ $.ajax({
   console.log(response);
   resultsOb.artistID = response.Artists[0].Id;
   let eventByArtistId = `http://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`
-  $ajax( {
+  $.ajax( {
     url: eventByArtistId,
     method: "GET"
   }) .then(function(result) {
     console.log(result);
+    resultsOb.numConcerts = result.Info.TotalResults;
+    result.Events.forEach(event => {
+      createConcert(event);
+    });
+      
     
   })
 });
