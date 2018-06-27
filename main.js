@@ -107,7 +107,7 @@ function displayConcertInfo(){
                     <div class="artist-data">
                         <div class="venue-name">${concert.Venue.Name}</div>
                         <div class="venue-address">${concert.Venue.Address} ${concert.Venue.City} ${concert.Venue.StateCode} ${concert.Venue.ZipCode}</div>
-                        <div class="venue-ticket-url">${concert.TicketUrl}</div>
+                        <div class="venue-ticket-url"><a href="${concert.TicketUrl}">Get Tickets</a></div>
                         <div class="venue-date">${concert.Date}</div>
                     </div>
                     <div class="venue-map">
