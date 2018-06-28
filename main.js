@@ -2,6 +2,7 @@ console.log('i am linked');
 
 //Variable Declarations
 let resultsOb = {}; //function below to initalize 
+let index = '';
 
 
 //Function Declarations
@@ -16,21 +17,24 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
-  let artistID = `http://api.jambase.com/artists?name=${artist}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`;
+  let artistID = `http://api.jambase.com/artists?name=${artist}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`;
+
+  //Kamons key: d3zdba3y643smqmw5mn44wk8
+  //Christies hey: eujv4tv8unnrjdwb7v459jvk
 
     $.ajax({
         url: artistID,
         method: "GET"
     }).then(function(response) {
-        console.log(response);
+        //console.log(response);
         resultsOb.artistID = response.Artists[0].Id;
-        let eventByArtistId = `http://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`
+        let eventByArtistId = `http://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`
         
         $.ajax( {
             url: eventByArtistId,
             method: "GET"
         }).then(function(result) {
-            console.log(result);
+            //console.log(result);
 
             resultsOb.numConcerts = result.Info.TotalResults;
             result.Events.forEach(event => {
@@ -39,8 +43,12 @@ function getArtistInfo(artist){
             
         }).then(function(){
             displayConcertInfo();
+            initMap();
+        
         })
     });
+
+   
 
     
 }
@@ -60,26 +68,12 @@ function createConcert(concert){
         lat: concert.Venue.Latitude,
         long: concert.Venue.Longitude,
     };
-    console.log(location.lat);
-    console.log(location.long);
+    //console.log(location.lat);
+    //console.log(location.long);
 
-    resultsOb.locationsArray.push(location); //Add the location to the locations array 
+   resultsOb.locationsArray.push(location); //Add the location to the locations array 
 
 }
-
-
-// Function: display concerts
-// function displayAllConcerts(){
-//     //Alter html using jquery to clear out previous concert results and display new concert results 
-//     //This should display all the concerts in an accordian, the next function is for the individual concert display
-//     //Store the results in the locationArray for the skResults object 
-//     //Need to create a data attribute to know which button you clicked (? unsure if this is ncessary)
-
-
-
-    
-
-// }
 
 
 // Function: display concert info 
@@ -87,22 +81,23 @@ function displayConcertInfo(){
     //Display the concert information including the map 
     console.log("inside display Concert Info");
     console.log("Array:" + resultsOb.artistsConcerts);
-    let index=0;
+    index=0;
 
     //Need to pass though the div ID or something to display the map in (maybe with a data attribute?)
     resultsOb.artistsConcerts.forEach(function(concert){
+
 
         let concertAccordian = `
         <div class="card">
             <div class="card-header" id="heading${index}">
                 <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="false"
+                    <button class="btn btn-link collapsed accord-header" type="button" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="false"
                         aria-controls="collapse${index}">
                         ${concert.Venue.City} | ${concert.Date}
                     </button>
                 </h5>
             </div>
-            <div id="collapse${index}" class="collapse" aria-labelledby="heading${index}" data-parent="#accordionExample">
+            <div id="collapse${index}" class="collapse" aria-labelledby="heading${index}" data-parent="#accordionExample" data-index=${index}>
                 <div class="card-body d-flex justify-content-around">
                     <div class="artist-data">
                         <h2 class="venue-name">${concert.Venue.Name}</h2>
@@ -110,13 +105,15 @@ function displayConcertInfo(){
                         <div class="venue-address">Location: ${concert.Venue.Address} ${concert.Venue.City} ${concert.Venue.StateCode} ${concert.Venue.ZipCode}</div>
                         <a href="${concert.TicketUrl}" target="blank" class="btn btn-primary btn-lg active" role="button">Get Tickets</a>
                     </div>
-                    <div class="venue-map">
-                        <img src="./images/Google-Map-Placeholder.png">
+                    
+                    <div id="venue-map${index}" class="venue-map" data-index=${index}>
                     </div>
+ 
                 </div>
             </div>
         </div>
         `;
+
         $('#accordion').append(concertAccordian);
 
         index++;
@@ -136,51 +133,33 @@ function displayConcertInfo(){
 }
 
 // Function: render map 
-// function renderMap(){
-//     //Call this function in the displayConcertInfo function
-//     //This should use the google map api and load the different coord points on the map in clusters
-//     //Use the locationsArray you saved to the skResults object and use this for the locations for clusters
+function initMap(){
+    //Call this function in the displayConcertInfo function
+    //This should use the google map api and load the different coord points on the map in clusters
+    //Use the locationsArray you saved to the skResults object and use this for the locations for clusters
 
 
-//     // //Can delete these later 
-//     // let nyc = {lat: 40.7128, lng: -74.0060};
-//     // let museum = {lat: 40.7813, lng: -73.9740};
+    for (let i=0; i< resultsOb.locationsArray.length; i++){
 
+        let location = resultsOb.locationsArray[i];
+        let lat = location.lat;
+        let long = location.long;
 
+        let coords = {
+            lat: lat,
+            lng: long
+        };
 
+        var map = new google.maps.Map(document.getElementById(`venue-map${i}`), {
+            zoom: 8,
+            center: coords,
+        });
+        var marker = new google.maps.Marker({position: coords, map: map});
 
-//     let map = new google.maps.Map(document.getElementById('map'), {
-//         center: nyc,
-//         zoom: 8
-//     });
+    }
 
-//     // var marker = new google.maps.Marker({position: nyc, map: map});
-//     // let marker = new google.maps.Marker({position: museum, map:map});
+}
 
-//     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-//         // Add some markers to the map.
-//         // Note: The code uses the JavaScript Array.prototype.map() method to
-//         // create an array of markers based on a given "locations" array.
-//         // The map() method here has nothing to do with the Google Maps API.
-//         var markers = locationsArray.map(function(location, i) {
-//           return new google.maps.Marker({
-//             position: location,
-//             label: labels[i % labels.length]
-//           });
-//         });
-
-//         // Add a marker clusterer to manage the markers.
-//         var markerCluster = new MarkerClusterer(map, markers,
-//             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-    
-//             //UPDATE THESE TO BE THE LOCATION OF THE CONCERT AND USE IN var markers = []
-//     //   var locations = [
-//     //     nyc,
-//     //     museum
-//     //   ];
-
-// }
 
 function initResultsOb(){
 
@@ -190,7 +169,7 @@ function initResultsOb(){
         artistID: '',
         artistsConcerts: [],
         numConcerts: '',
-        locationsArray:[] //holds all the location objects to be used for google maps 
+        locationsArray:[], //holds all the location objects to be used for google maps 
     }; 
 }
 
@@ -202,21 +181,13 @@ $(document).on('click', '.find', function(){
     event.preventDefault(); //Prevent from submitting early 
 
     let artist = $('#find-artist').val();  //Grab the value of the artist submit button //TODO change to match FE values
-    console.log(artist);
+    //console.log(artist);
 
     getArtistInfo(artist); //Call the function that calls the API     
 
 
 })
-// Click handler for clicking on a concert --> call the displayConcerts function and use the index from the concertObj array 
-$(document).on('click', '.display', function(){
 
-    event.preventDefault(); //Prevent from submitting early 
-
-   
-
-
-})
 
 
 //On page load

@@ -29,6 +29,17 @@ body {
   .title.show {
     opacity: 1;
   }
+
+  .map-container{
+    max-height: 250px;
+    max-width: 500px;
+  }
+
+  .venue-map{
+    height: 250px;  /* The height is 400 pixels */
+    width: 50%;  /* The width is the width of the web page */
+        
+  }
   
   @keyframes fadein {
     from {
