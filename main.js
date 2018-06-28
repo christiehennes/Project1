@@ -100,10 +100,10 @@ function displayConcertInfo(){
             <div id="collapse${index}" class="collapse" aria-labelledby="heading${index}" data-parent="#accordionExample" data-index=${index}>
                 <div class="card-body d-flex justify-content-around">
                     <div class="artist-data">
-                        <div class="venue-name">${concert.Venue.Name}</div>
-                        <div class="venue-address">${concert.Venue.Address} ${concert.Venue.City} ${concert.Venue.StateCode} ${concert.Venue.ZipCode}</div>
-                        <div class="venue-ticket-url"><a href="${concert.TicketUrl}">Get Tickets</a></div>
-                        <div class="venue-date">${concert.Date}</div>
+                        <h2 class="venue-name">${concert.Venue.Name}</h2>
+                        <div class="venue-date">Event Date: ${concert.Date}</div>
+                        <div class="venue-address">Location: ${concert.Venue.Address} ${concert.Venue.City} ${concert.Venue.StateCode} ${concert.Venue.ZipCode}</div>
+                        <a href="${concert.TicketUrl}" target="blank" class="btn btn-primary btn-lg active" role="button">Get Tickets</a>
                     </div>
                     
                     <div id="venue-map${index}" class="venue-map" data-index=${index}>

@@ -11,11 +11,12 @@ body {
   }
 
   .title {
-    font-size: 3rem;  
+    font-size: 8vw;  
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
     top: 30%;
+    max-width: 900px;
     color: white;
     animation: fadein 4s ease;
   }
