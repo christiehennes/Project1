@@ -17,7 +17,7 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
-  let artistID = `http://api.jambase.com/artists?name=${artist}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`;
+  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`;
 
   //Kamons key: d3zdba3y643smqmw5mn44wk8
   //Christies hey: eujv4tv8unnrjdwb7v459jvk
@@ -28,7 +28,7 @@ function getArtistInfo(artist){
     }).then(function(response) {
         //console.log(response);
         resultsOb.artistID = response.Artists[0].Id;
-        let eventByArtistId = `http://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`
+        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`
         
         $.ajax( {
             url: eventByArtistId,
