@@ -17,10 +17,11 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
-  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`;
+  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`;
 
   //Kamons key: d3zdba3y643smqmw5mn44wk8
   //Christies hey: eujv4tv8unnrjdwb7v459jvk
+  //blades key: kzctw8t49w3c5f7pmap3x87g
 
     $.ajax({
         url: artistID,
@@ -28,7 +29,7 @@ function getArtistInfo(artist){
     }).then(function(response) {
         // console.log(response);
         resultsOb.artistID = response.Artists[0].Id;
-        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`
+        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`
         
         $.ajax( {
             url: eventByArtistId,
@@ -88,7 +89,7 @@ function displayConcertInfo(){
 
 
         let concertAccordian = `
-        <div class="card">
+        <div class="card animated zoomInUp">
             <div class="card-header" id="heading${index}">
                 <h5 class="mb-0">
                     <button class="btn btn-link collapsed accord-header" type="button" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="false"
@@ -179,7 +180,9 @@ function initResultsOb(){
 $(document).on('click', '.find', function(event){
 
     event.preventDefault(); //Prevent from submitting early 
-
+    $(this).addClass("animated tada");
+    $('#accordion').empty();
+    // $('#accordion').append(concertAccordian);    
     let artist = $('#find-artist').val();  //Grab the value of the artist submit button //TODO change to match FE values
     //console.log(artist);
 
