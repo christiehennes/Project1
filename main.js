@@ -7,7 +7,6 @@ let index = '';
 
 //Function Declarations
 
-
 // Function: api call for JAMBASE + store result in an object 
 function getArtistInfo(artist){
 
@@ -22,11 +21,20 @@ function getArtistInfo(artist){
   //Kamons key: d3zdba3y643smqmw5mn44wk8
   //Christies hey: eujv4tv8unnrjdwb7v459jvk
 
+  //Make the first API call to get the ID of the artist
     $.ajax({
         url: artistID,
         method: "GET"
     }).then(function(response) {
-        // console.log(response);
+        console.log(response);
+
+        //Check to see if there are any results, if not then display the error message
+        if(response.Artists.length === 0){
+            displayError("Oops! No results found");
+            return;
+        }
+
+        //Get the ID from the first API call to make the second and pull all the concerts
         resultsOb.artistID = response.Artists[0].Id;
         let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`
         
@@ -34,11 +42,11 @@ function getArtistInfo(artist){
             url: eventByArtistId,
             method: "GET"
         }).then(function(result) {
-            // console.log(result);
+            console.log(result);
 
             resultsOb.numConcerts = result.Info.TotalResults;
             result.Events.forEach(event => {
-                createConcert(event);
+                createConcert(event); //Create a new concert object to use to populate details for each concert
             });
             
         }).then(function(){
@@ -194,6 +202,18 @@ function initResultsOb(){
     }; 
 }
 
+function verifyEntry(artist){
+    console.log(artist);
+    if (!artist) { return false }
+    else { return true };
+}
+
+function displayError(string){
+
+    alert(string);
+
+}
+
 //Click Handlers 
 
 // Click handler for the search artist button --> call the getArtistInfo function and pass in the text from input field 
@@ -204,7 +224,14 @@ $(document).on('click', '.find', function(event){
     let artist = $('#find-artist').val();  //Grab the value of the artist submit button //TODO change to match FE values
     //console.log(artist);
 
-    getArtistInfo(artist); //Call the function that calls the API     
+    if(verifyEntry(artist)){
+        getArtistInfo(artist); //Call the function that calls the API    
+    }
+    else{
+        displayError("Please enter valid artist");
+    }
+
+     
 
 
 })
