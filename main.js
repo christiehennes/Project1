@@ -16,7 +16,7 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
-  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`;
+  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`;
 
   //Kamons key: d3zdba3y643smqmw5mn44wk8
   //Christies hey: eujv4tv8unnrjdwb7v459jvk
@@ -37,13 +37,19 @@ function getArtistInfo(artist){
 
         //Get the ID from the first API call to make the second and pull all the concerts
         resultsOb.artistID = response.Artists[0].Id;
-        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`
+        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`
         
+
         $.ajax( {
             url: eventByArtistId,
             method: "GET"
         }).then(function(result) {
             console.log(result);
+
+            if(result.Info.TotalResults === 0){
+                displayError("No upcoming shows");
+                return;
+            }
 
             resultsOb.numConcerts = result.Info.TotalResults;
             result.Events.forEach(event => {
