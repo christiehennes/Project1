@@ -30,7 +30,7 @@ function getArtistInfo(artist){
 
         //Check to see if there are any results, if not then display the error message
         if(response.Artists.length === 0){
-            displayError("Oops! No results found");
+            displayError("No results found");
             return;
         }
 
@@ -204,13 +204,30 @@ function initResultsOb(){
 
 function verifyEntry(artist){
     console.log(artist);
-    if (!artist) { return false }
+    if (!artist) { 
+
+        // // $('.popover-dismiss').popover({
+        // //     trigger: 'focus'
+        // //   })
+
+
+
+
+
+
+        // $('[data-toggle="popover"]').each(function(){
+        //     $(this).popover(); 
+        // });
+        return false;
+    }
     else { return true };
 }
 
 function displayError(string){
+    console.log()
 
-    alert(string);
+    swal ( "Error", string ,  "error" );
+
 
 }
 
@@ -228,7 +245,7 @@ $(document).on('click', '.find', function(event){
         getArtistInfo(artist); //Call the function that calls the API    
     }
     else{
-        displayError("Please enter valid artist");
+        displayError("Please enter a valid artist");
     }
 
      
