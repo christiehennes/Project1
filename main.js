@@ -7,7 +7,6 @@ let index = '';
 
 //Function Declarations
 
-
 // Function: api call for JAMBASE + store result in an object 
 function getArtistInfo(artist){
 
@@ -21,12 +20,22 @@ function getArtistInfo(artist){
 
   //Kamons key: d3zdba3y643smqmw5mn44wk8
   //Christies hey: eujv4tv8unnrjdwb7v459jvk
+  //blades key: kzctw8t49w3c5f7pmap3x87g
 
+  //Make the first API call to get the ID of the artist
     $.ajax({
         url: artistID,
         method: "GET"
     }).then(function(response) {
-        // console.log(response);
+        console.log(response);
+
+        //Check to see if there are any results, if not then display the error message
+        if(response.Artists.length === 0){
+            displayError("No results found");
+            return;
+        }
+
+        //Get the ID from the first API call to make the second and pull all the concerts
         resultsOb.artistID = response.Artists[0].Id;
         let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`
         
@@ -34,11 +43,11 @@ function getArtistInfo(artist){
             url: eventByArtistId,
             method: "GET"
         }).then(function(result) {
-            // console.log(result);
+            console.log(result);
 
             resultsOb.numConcerts = result.Info.TotalResults;
             result.Events.forEach(event => {
-                createConcert(event);
+                createConcert(event); //Create a new concert object to use to populate details for each concert
             });
             
         }).then(function(){
@@ -96,7 +105,7 @@ function displayConcertInfo(){
         }
 
         let concertAccordian = `
-        <div class="card">
+        <div class="card animated zoomInUp">
             <div class="card-header" id="heading${index}">
                 <h5 class="mb-0">
                     <button class="btn btn-link collapsed accord-header" type="button" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="false"
@@ -142,11 +151,9 @@ function displayConcertInfo(){
 
 // Function: render map 
 function initMap(){
-    //Call this function in the displayConcertInfo function
-    //This should use the google map api and load the different coord points on the map in clusters
-    //Use the locationsArray you saved to the skResults object and use this for the locations for clusters
 
-
+    //Create map objects using Google Maps JS API
+    //If there are no coords, then use the Google Maps Geocoder function to display a map of the concert city 
     for (let i=0; i< resultsOb.locationsArray.length; i++){
 
         let location = resultsOb.locationsArray[i];
@@ -164,9 +171,32 @@ function initMap(){
         });
         var marker = new google.maps.Marker({position: coords, map: map});
 
+        //If there are no coordinates, then search the city and update the map 
+        if (lat === 0.0 ){
+            let city = resultsOb.artistsConcerts[i].Venue.City; 
+            var geocoder = new google.maps.Geocoder();
+            geocodeAddress(geocoder, map, city); //Call the function that will replace the map with city location
+        }
+
     }
 
 }
+
+function geocodeAddress(geocoder, resultsMap, location) {
+
+    var address = location; 
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: Cannot find location');
+      }
+    });
+  }
 
 
 function initResultsOb(){
@@ -181,17 +211,55 @@ function initResultsOb(){
     }; 
 }
 
+function verifyEntry(artist){
+    console.log(artist);
+    if (!artist) { 
+
+        // // $('.popover-dismiss').popover({
+        // //     trigger: 'focus'
+        // //   })
+
+
+
+
+
+
+        // $('[data-toggle="popover"]').each(function(){
+        //     $(this).popover(); 
+        // });
+        return false;
+    }
+    else { return true };
+}
+
+function displayError(string){
+    console.log()
+
+    swal ( "Error", string ,  "error" );
+
+
+}
+
 //Click Handlers 
 
 // Click handler for the search artist button --> call the getArtistInfo function and pass in the text from input field 
 $(document).on('click', '.find', function(event){
 
     event.preventDefault(); //Prevent from submitting early 
-
+    $(this).addClass("animated tada");
+    $('#accordion').empty();
+    // $('#accordion').append(concertAccordian);    
     let artist = $('#find-artist').val();  //Grab the value of the artist submit button //TODO change to match FE values
     //console.log(artist);
 
-    getArtistInfo(artist); //Call the function that calls the API     
+    if(verifyEntry(artist)){
+        getArtistInfo(artist); //Call the function that calls the API    
+    }
+    else{
+        displayError("Please enter a valid artist");
+    }
+
+     
 
 
 })
