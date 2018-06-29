@@ -26,7 +26,7 @@ function getArtistInfo(artist){
         url: artistID,
         method: "GET"
     }).then(function(response) {
-        //console.log(response);
+        // console.log(response);
         resultsOb.artistID = response.Artists[0].Id;
         let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=eujv4tv8unnrjdwb7v459jvk`
         
@@ -34,7 +34,7 @@ function getArtistInfo(artist){
             url: eventByArtistId,
             method: "GET"
         }).then(function(result) {
-            //console.log(result);
+            // console.log(result);
 
             resultsOb.numConcerts = result.Info.TotalResults;
             result.Events.forEach(event => {
@@ -61,15 +61,15 @@ function createConcert(concert){
     //Use a map to return coordinate info and save in locationsArray --> https://repl.it/repls/KosherOrneryDeeplearning
 
     resultsOb.artistsConcerts.push(concert); //Add the concert to the concerts array. This adds the FULL unprocessed object 
-    //console.log("Concert obj:" + concert);
+    console.log("Concert obj:" + concert);
 
     //Create the location oject 
     let location = {
         lat: concert.Venue.Latitude,
         long: concert.Venue.Longitude,
     };
-    //console.log(location.lat);
-    //console.log(location.long);
+    // console.log(location.lat);
+    // console.log(location.long);
 
    resultsOb.locationsArray.push(location); //Add the location to the locations array 
 
@@ -176,7 +176,7 @@ function initResultsOb(){
 //Click Handlers 
 
 // Click handler for the search artist button --> call the getArtistInfo function and pass in the text from input field 
-$(document).on('click', '.find', function(){
+$(document).on('click', '.find', function(event){
 
     event.preventDefault(); //Prevent from submitting early 
 
