@@ -17,7 +17,11 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
+<<<<<<< HEAD
   let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`;
+=======
+  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`;
+>>>>>>> bb4e5ef2ff138dc60e768bd3ce671f104487cc08
 
   //Kamons key: d3zdba3y643smqmw5mn44wk8
   //Christies hey: eujv4tv8unnrjdwb7v459jvk
@@ -29,7 +33,11 @@ function getArtistInfo(artist){
     }).then(function(response) {
         // console.log(response);
         resultsOb.artistID = response.Artists[0].Id;
+<<<<<<< HEAD
         let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`
+=======
+        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`
+>>>>>>> bb4e5ef2ff138dc60e768bd3ce671f104487cc08
         
         $.ajax( {
             url: eventByArtistId,
@@ -135,11 +143,9 @@ function displayConcertInfo(){
 
 // Function: render map 
 function initMap(){
-    //Call this function in the displayConcertInfo function
-    //This should use the google map api and load the different coord points on the map in clusters
-    //Use the locationsArray you saved to the skResults object and use this for the locations for clusters
 
-
+    //Create map objects using Google Maps JS API
+    //If there are no coords, then use the Google Maps Geocoder function to display a map of the concert city 
     for (let i=0; i< resultsOb.locationsArray.length; i++){
 
         let location = resultsOb.locationsArray[i];
@@ -157,9 +163,32 @@ function initMap(){
         });
         var marker = new google.maps.Marker({position: coords, map: map});
 
+        //If there are no coordinates, then search the city and update the map 
+        if (lat === 0.0 ){
+            let city = resultsOb.artistsConcerts[i].Venue.City; 
+            var geocoder = new google.maps.Geocoder();
+            geocodeAddress(geocoder, map, city); //Call the function that will replace the map with city location
+        }
+
     }
 
 }
+
+function geocodeAddress(geocoder, resultsMap, location) {
+
+    var address = location; 
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: Cannot find location');
+      }
+    });
+  }
 
 
 function initResultsOb(){
