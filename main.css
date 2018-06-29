@@ -40,6 +40,14 @@ body {
     width: 50%;  /* The width is the width of the web page */
         
   }
+
+  .navbar-brand {
+    font-size: 3vw;  
+    /* font-family: 'Shrikhand', cursive; */
+    font-family: 'Galada', cursive;
+    /* font-family: 'Lobster', cursive; */
+
+  }
   
   @keyframes fadein {
     from {
