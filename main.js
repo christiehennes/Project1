@@ -94,7 +94,15 @@ function displayConcertInfo(){
 
     //Need to pass though the div ID or something to display the map in (maybe with a data attribute?)
     resultsOb.artistsConcerts.forEach(function(concert){
-
+        let eDate= eventDate(concert.Date);
+        function eventDate(date){
+            console.log(date);
+            date2 =date.split('T');
+            console.log(date);
+            let concertDate = moment(date2[0],'YYYY-MM-DD').format('MM/DD/YYYY');
+            console.log(concertDate);
+            return concertDate
+        }
 
         let concertAccordian = `
         <div class="card animated zoomInUp">
@@ -102,7 +110,7 @@ function displayConcertInfo(){
                 <h5 class="mb-0">
                     <button class="btn btn-link collapsed accord-header" type="button" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="false"
                         aria-controls="collapse${index}">
-                        ${concert.Venue.City} | ${concert.Date}
+                        ${concert.Venue.City} | ${eDate}
                     </button>
                 </h5>
             </div>
@@ -110,7 +118,7 @@ function displayConcertInfo(){
                 <div class="card-body d-flex justify-content-around">
                     <div class="artist-data">
                         <h2 class="venue-name">${concert.Venue.Name}</h2>
-                        <div class="venue-date">Event Date: ${concert.Date}</div>
+                        <div class="venue-date">Event Date: ${eDate}</div>
                         <div class="venue-address">Location: ${concert.Venue.Address} ${concert.Venue.City} ${concert.Venue.StateCode} ${concert.Venue.ZipCode}</div>
                         <a href="${concert.TicketUrl}" target="blank" class="btn btn-primary btn-lg active" role="button">Get Tickets</a>
                     </div>
