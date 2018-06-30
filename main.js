@@ -3,7 +3,7 @@ console.log('i am linked');
 //Variable Declarations
 let resultsOb = {}; //function below to initalize 
 let index = '';
-let Keys = ['d3zdba3y643smqmw5mn44wk8','eujv4tv8unnrjdwb7v459jvk','kzctw8t49w3c5f7pmap3x87g'];
+let keys = ['d3zdba3y643smqmw5mn44wk8','eujv4tv8unnrjdwb7v459jvk','kzctw8t49w3c5f7pmap3x87g'];
 
 //Function Declarations
 
