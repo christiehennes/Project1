@@ -14,19 +14,20 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark justify-content-center">
-        <a class="navbar-brand text-white animated fadeInLeftBig">Music Venue Search</a>
+        <h1 class="logo text-white text-center animated fadeInLeftBig">Music Venue Search</h1>
     </nav>
     <div class="hero">
         <div class="title">
-            <h1 class="text-center animated fadeInRightBig">Welcome to the Music!</h1>
+            <h2 class="text-center animated fadeInRightBig">Welcome to the Music!</h2>
             <form class="form-group d-flex align-self-center">
-                <input class="form-control mr-sm-2" type="search" placeholder="Enter artist name" aria-label="Search" id="find-artist">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="find-artist">
                 <button class="btn btn-primary my-2 my-sm-0 text-center find" type="submit" id="find">Find</button>
             </form>
+            <h6 class="search-tag text-white">Search for Bands or Artist.</h6>
         </div>
     </div>
     <div class="container">
-        <div class="jumbotron"></div>
+        <!-- <div class="jumbotron"></div> -->
         <div class="accordion" id="accordion">
 
             <!--*************************** TO BE DELETED. USED FOR DESIGN *******************-->
@@ -118,6 +119,13 @@
 
         </div>
     </div>
+
+    <footer class="footer bg-white shadow">
+        <div class="container">
+          <span class="text-muted"><a href="http://www.JamBase.com" target="_top" title="JamBase Concert Search">
+            <img src= "http://images.jambase.com/logos/jambase140x70.gif" alt="Search JamBase Concerts" border="0" /></a></span>
+        </div>
+      </footer>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
