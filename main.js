@@ -16,15 +16,10 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
-<<<<<<< HEAD
+
   let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`;
-=======
-<<<<<<< HEAD
+  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`;
   let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`;
-=======
-  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`;
->>>>>>> bb4e5ef2ff138dc60e768bd3ce671f104487cc08
->>>>>>> 381d8b7ceeb85407668c9588740f3a4d30bd0df2
 
   //Kamons key: d3zdba3y643smqmw5mn44wk8
   //Christies hey: eujv4tv8unnrjdwb7v459jvk
@@ -39,27 +34,27 @@ function getArtistInfo(artist){
 
         //Check to see if there are any results, if not then display the error message
         if(response.Artists.length === 0){
-            displayError("Oops! No results found");
+            displayError("No results found");
             return;
         }
 
         //Get the ID from the first API call to make the second and pull all the concerts
         resultsOb.artistID = response.Artists[0].Id;
-<<<<<<< HEAD
         let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`
-=======
-<<<<<<< HEAD
         let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`
-=======
         let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=d3zdba3y643smqmw5mn44wk8`
->>>>>>> bb4e5ef2ff138dc60e768bd3ce671f104487cc08
->>>>>>> 381d8b7ceeb85407668c9588740f3a4d30bd0df2
-        
+        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`
+
         $.ajax( {
             url: eventByArtistId,
             method: "GET"
         }).then(function(result) {
             console.log(result);
+
+            if(result.Info.TotalResults === 0){
+                displayError("No upcoming shows");
+                return;
+            }
 
             resultsOb.numConcerts = result.Info.TotalResults;
             result.Events.forEach(event => {
@@ -229,13 +224,25 @@ function initResultsOb(){
 
 function verifyEntry(artist){
     console.log(artist);
-    if (!artist) { return false }
+    if (!artist) { 
+
+        // // $('.popover-dismiss').popover({
+        // //     trigger: 'focus'
+        // //   })
+
+        // $('[data-toggle="popover"]').each(function(){
+        //     $(this).popover(); 
+        // });
+        return false;
+    }
     else { return true };
 }
 
 function displayError(string){
+    console.log()
 
-    alert(string);
+    swal ( "Error", string ,  "error" );
+
 
 }
 
@@ -255,7 +262,7 @@ $(document).on('click', '.find', function(event){
         getArtistInfo(artist); //Call the function that calls the API    
     }
     else{
-        displayError("Please enter valid artist");
+        displayError("Please enter a valid artist");
     }
 
      
