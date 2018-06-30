@@ -3,7 +3,7 @@ console.log('i am linked');
 //Variable Declarations
 let resultsOb = {}; //function below to initalize 
 let index = '';
-
+let keys = ['d3zdba3y643smqmw5mn44wk8','eujv4tv8unnrjdwb7v459jvk','kzctw8t49w3c5f7pmap3x87g'];
 
 //Function Declarations
 
@@ -16,8 +16,9 @@ function getArtistInfo(artist){
     //Create the API call 
     // Store the results in the skResults object 
     //Create a new concert for each concert (call the createConcert function in a loop)
-  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`;
+  let artistID = `https://api.jambase.com/artists?name=${artist}&page=0&api_key=${keys[0]}`;
 
+  
   //Kamons key: d3zdba3y643smqmw5mn44wk8
   //Christies hey: eujv4tv8unnrjdwb7v459jvk
   //blades key: kzctw8t49w3c5f7pmap3x87g
@@ -37,7 +38,7 @@ function getArtistInfo(artist){
 
         //Get the ID from the first API call to make the second and pull all the concerts
         resultsOb.artistID = response.Artists[0].Id;
-        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=kzctw8t49w3c5f7pmap3x87g`
+        let eventByArtistId = `https://api.jambase.com/events?artistId=${resultsOb.artistID}&page=0&api_key=${keys[0]}`
         
 
         $.ajax( {
@@ -172,16 +173,16 @@ function initMap(){
         };
 
         var map = new google.maps.Map(document.getElementById(`venue-map${i}`), {
-            zoom: 8,
+            zoom: 11,
             center: coords,
         });
         var marker = new google.maps.Marker({position: coords, map: map});
 
         //If there are no coordinates, then search the city and update the map 
         if (lat === 0.0 ){
-            let city = resultsOb.artistsConcerts[i].Venue.City; 
+            let venue = resultsOb.artistsConcerts[i].Venue.Name; 
             var geocoder = new google.maps.Geocoder();
-            geocodeAddress(geocoder, map, city); //Call the function that will replace the map with city location
+            geocodeAddress(geocoder, map, venue); //Call the function that will replace the map with city location
         }
 
     }
