@@ -18,7 +18,7 @@ body {
     top: 30%;
     max-width: 900px;
     color: white;
-    animation: fadein 4s ease;
+    animation: fadein 2.5s ease;
   }
 
   .jumbotron {
@@ -39,6 +39,14 @@ body {
     height: 250px;  /* The height is 400 pixels */
     width: 50%;  /* The width is the width of the web page */
         
+  }
+
+  .navbar-brand {
+    font-size: 3vw;  
+    /* font-family: 'Shrikhand', cursive; */
+    font-family: 'Galada', cursive;
+    /* font-family: 'Lobster', cursive; */
+
   }
   
   @keyframes fadein {
