@@ -173,16 +173,16 @@ function initMap(){
         };
 
         var map = new google.maps.Map(document.getElementById(`venue-map${i}`), {
-            zoom: 8,
+            zoom: 11,
             center: coords,
         });
         var marker = new google.maps.Marker({position: coords, map: map});
 
         //If there are no coordinates, then search the city and update the map 
         if (lat === 0.0 ){
-            let city = resultsOb.artistsConcerts[i].Venue.City; 
+            let venue = resultsOb.artistsConcerts[i].Venue.Name; 
             var geocoder = new google.maps.Geocoder();
-            geocodeAddress(geocoder, map, city); //Call the function that will replace the map with city location
+            geocodeAddress(geocoder, map, venue); //Call the function that will replace the map with city location
         }
 
     }
