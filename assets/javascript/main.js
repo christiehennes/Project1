@@ -127,7 +127,7 @@ function displayConcertInfo(){
                         <h2 class="venue-name">${concert.Venue.Name}</h2>
                         <div class="venue-date">Event Date: ${eDate}</div>
                         <div class="venue-address">Location: ${concert.Venue.Address} ${concert.Venue.City} ${concert.Venue.StateCode} ${concert.Venue.ZipCode}</div>
-                        <a href="${concert.TicketUrl}" target="blank" class="btn btn-primary btn-lg active" role="button">Get Tickets</a>
+                        <a href="${concert.TicketUrl}" target="blank" class="btn btn-primary btn-lg active mt-2" role="button">Get Tickets</a>
                     </div>
                     
                     <div id="venue-map${index}" class="venue-map" data-index=${index}>
