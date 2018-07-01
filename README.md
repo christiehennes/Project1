@@ -10,9 +10,9 @@ Use the search bar to enter a band or artist name to see the venue results.
 
 ## Screenshots
 
-![Image of Homepage](assets/images/Giphy-API-Search-HOME.png)
+![Image of Homepage](assets/images/search-home.jpg)
 
-![Image of Results](assets/images/Giphy-API-Search-RESULTS.png)
+![Image of Results](assets/images/search-results.jpg)
 
 
 ## Built With
@@ -29,5 +29,5 @@ Use the search bar to enter a band or artist name to see the venue results.
 
 ## Acknowledgments
 
-*[Google Maps API](https://cloud.google.com/maps-platform/) for the maps
-*[JamBase API](https://www.jambase.com/) for the artist information
+* [Google Maps API](https://cloud.google.com/maps-platform/) for the maps
+* [JamBase API](https://www.jambase.com/) for the artist information
