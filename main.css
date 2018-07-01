@@ -18,6 +18,7 @@ body {
 
 .hero {
     height: 450px;
+    padding-top: 130px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -25,10 +26,7 @@ body {
   }
 
   .title {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 30%;
+    margin: 0 auto;
     width: 800px;
     color: white;
     animation: fadein 2.5s ease;
@@ -80,15 +78,14 @@ body {
     }
   }
 
-  @media only screen and (max-width: 768px) {
-    .title {
-      width: 500px;
+@media only screen and (max-width: 768px) {
+  .title {
+    width: 400px;
     }
 }
 
-
-@media only screen and (max-width: 355px) {
+@media only screen and (max-width: 375px) {
   .title {
-    max-width: 200px;
+    width: 200px;
   }
 }
