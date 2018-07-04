@@ -36,10 +36,9 @@ body {
     line-height: 0px;
   }
 
-  /* .jumbotron {
-    margin-top: -200px;
-    background-color: transparent !important;
-  } */
+  .card-deck {
+    margin: -75px auto 100px auto;
+  }
 
   .accordion {
       margin-top: -75px;
