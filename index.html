@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,13 +15,14 @@
     <meta name="theme-color" content="#ffffff">
     <title class=>Music Artist Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Galada|Lobster|Shrikhand" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/main.css" />   
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/main.css" />
 </head>
+
 <body>
     <nav class="navbar navbar-dark bg-dark justify-content-center">
         <h1 class="logo text-white text-center animated fadeInLeftBig">Music Venue Search</h1>
@@ -33,116 +35,45 @@
                 <button class="btn btn-primary my-2 my-sm-0 text-center find" type="submit" id="find">Find</button>
             </form>
             <h6 class="search-tag text-white">Search for Bands or Artist.</h6>
-        </div> 
+        </div>
     </div>
     <div class="container">
-        <!-- <div class="jumbotron"></div> -->
         <div class="accordion" id="accordion">
-
-            <!--*************************** TO BE DELETED. USED FOR DESIGN *******************-->
-            <!-- <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            City | Date
-                        </button>
-                    </h5>
-                </div>
-    
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body d-flex justify-content-around">
-                        <div class="artist-data">
-                            <h2 class="venue-name">Johnny Cash</h2>
-                            <div class="venue-date">Event Date: 01/01/2018</div>
-                            <div class="venue-address">Location: 1234 Happy St. San Diego, CA</div>
-                            <a href="https://christiehennes.github.io./Project1/" target="blank" class="btn btn-primary btn-lg active" role="button">Get Tickets</a>
-                        </div>
-                        <div class="venue-map">
-                            <img src="./images/Google-Map-Placeholder.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                            aria-controls="collapseTwo">
-                            City | Date
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body d-flex justify-content-around">
-                        <div class="artist-data">
-                            <div class="venue-name">Johnny Cash</div>
-                            <div class="venue-address">1234 Happy St. San Diego, CA</div>
-                            <div class="venue-ticket-url">www.ticketurl.com</div>
-                            
-                            <div class="venue-date">01/01/2018</div>
-                        </div>
-                        <div class="venue-map">
-                            <img src="./images/Google-Map-Placeholder.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                            aria-controls="collapseThree">
-                            City | Date
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body d-flex justify-content-around">
-                        <div class="artist-data">
-                            <div class="venue-name">Johnny Cash</div>
-                            <div class="venue-address">1234 Happy St. San Diego, CA</div>
-                            <div class="venue-ticket-url">www.ticketurl.com</div>
-                            <div class="venue-date">01/01/2018</div>
-                        </div>
-                        <div class="venue-map">
-                            <img src="./images/Google-Map-Placeholder.png">
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!--*************************** END TO BE DELETED. USED FOR DESIGN *******************-->
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="modal-body"></div>
                     </div>
-                    <div class="modal-body" id="modal-body"></div>
                 </div>
             </div>
-        </div>
-
         </div>
     </div>
 
     <footer class="footer bg-white shadow">
         <div class="container">
-          <span class="text-muted"><a href="http://www.JamBase.com" target="_top" title="JamBase Concert Search">
-            <img src= "http://images.jambase.com/logos/jambase140x70.gif" alt="Search JamBase Concerts" border="0" /></a></span>
+            <span class="text-muted">
+                <a href="http://www.JamBase.com" target="_top" title="JamBase Concert Search">
+                    <img src="http://images.jambase.com/logos/jambase140x70.gif" alt="Search JamBase Concerts" border="0" />
+                </a>
+            </span>
         </div>
-      </footer>
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMDbH32Lkx4DIQDGMykZSMrg_bHfkTmCc&callback=initMap"
-    async defer></script>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMDbH32Lkx4DIQDGMykZSMrg_bHfkTmCc&callback=initMap" async
+        defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./assets/javascript/main.js"></script>
 </body>
+
 </html>
