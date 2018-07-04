@@ -251,8 +251,9 @@ function displayError(string){
 
 // Click handler for the search artist button --> call the getArtistInfo function and pass in the text from input field 
 $(document).on('click', '.find', function(event){
-
+    
     event.preventDefault(); //Prevent from submitting early 
+    $('#home-tiles').hide();
     $(this).addClass("animated tada");
     $('#accordion').empty();
     // $('#accordion').append(concertAccordian);    
